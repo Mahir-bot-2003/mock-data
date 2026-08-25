@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>For My Favorite Person 💕 | A Little Love Letter</title>
+  <meta name="description"
+    content="A playful, warm, and handmade digital love letter full of little memories, reasons, and sweet surprises." />
+
+  <!-- Google Fonts: Caveat & Patrick Hand for handwriting, Quicksand & Outfit for clean playful body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Outfit:wght@400;500;600;700&family=Patrick+Hand&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Canvas Confetti Library for joyful explosions -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       1. COLOR PALETTE & DESIGN SYSTEM (Warm, Romantic, Handmade)
+       ========================================================================== */
+    :root {
+      --bg-cream: #fff9f5;
+      --bg-card: #ffffff;
+      --bg-card-warm: #fffdfa;
+      --bg-peach: #ffece5;
+      --bg-lavender: #f4ecff;
+      --bg-soft-yellow: #fff7d6;
+
+      --pink-soft: #ffd7df;
+      --pink-primary: #ff758f;
+      --pink-deep: #ff4d6d;
+      --rose-dark: #5c2c35;
+      --rose-accent: #a44254;
+
+      --peach-accent: #ff9f7d;
+      --gold-accent: #f9bc60;
+      --mint-accent: #cbf3f0;
+      --lavender-accent: #d8bbff;
+
+      --text-main: #3d2328;
+      --text-muted: #7d5860;
+      --text-light: #a8848c;
+
+      --border-color: rgba(255, 117, 143, 0.25);
+      --shadow-soft: 0 10px 30px rgba(92, 44, 53, 0.08);
+      --shadow-polaroid: 0 14px 28px rgba(92, 44, 53, 0.12), 0 10px 10px rgba(92, 44, 53, 0.06);
+      --shadow-hover: 0 20px 40px rgba(255, 77, 109, 0.18);
+
+      --font-hand: 'Caveat', cursive;
+      --font-note: 'Patrick Hand', cursive;
+      --font-body: 'Quicksand', sans-serif;
+      --font-display: 'Outfit', sans-serif;
+
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --radius-pill: 999px;
+    }
+
+    /* CSS Reset & Base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      background-image:
+        radial-gradient(var(--pink-soft) 0.8px, transparent 0.8px),
+        radial-gradient(var(--bg-peach) 0.8px, var(--bg-cream) 0.8px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-weight: 500;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Floating Background Particle Canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Top Sound & Floating Quick Menu */
+    .top-controls {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid var(--pink-soft);
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      color: var(--rose-dark);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(255, 117, 143, 0.15);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pill-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      border-color: var(--pink-primary);
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.25);
+      background: #fff;
+    }
+
+    .pill-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Section Global Styles */
+    section {
+      padding: 70px 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-peach);
+      color: var(--rose-accent);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      border: 1px dashed var(--pink-primary);
+      transform: rotate(-1.5deg);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      color: var(--rose-dark);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .section-title span.handwritten {
+      font-family: var(--font-hand);
+      font-size: 1.25em;
+      color: var(--pink-deep);
+      font-weight: 700;
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* Hand-Drawn Washi Tape Accents */
+    .washi-tape {
+      position: absolute;
+      width: 110px;
+      height: 28px;
+      background: rgba(255, 215, 223, 0.75);
+      border-left: 2px dashed rgba(255, 255, 255, 0.6);
+      border-right: 2px dashed rgba(255, 255, 255, 0.6);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .washi-tape.yellow {
+      background: rgba(255, 240, 160, 0.78);
+    }
+
+    .washi-tape.mint {
+      background: rgba(203, 243, 240, 0.8);
+    }
+
+    .washi-tape.peach {
+      background: rgba(255, 220, 200, 0.8);
+    }
+
+    .washi-tape.top-center {
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+    }
+
+    .washi-tape.top-left {
+      top: -12px;
+      left: 20px;
+      transform: rotate(-7deg);
+    }
+
+    .washi-tape.top-right {
+      top: -12px;
+      right: 20px;
+      transform: rotate(6deg);
+    }
+
+    /* Doodle Stickers & Badges */
+    .sticker-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 2px solid var(--pink-soft);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      font-family: var(--font-note);
+      font-size: 1rem;
+      color: var(--rose-dark);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+      user-select: none;
+    }
+
+    /* ==========================================================================
+       2. HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius-lg);
+      padding: clamp(32px, 6vw, 64px) clamp(20px, 5vw, 48px);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+      animation: floatHero 6s ease-in-out infinite;
+    }
+
+    @keyframes floatHero {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Airmail Stamp Border Element */
+    .postage-stamp {
+      position: absolute;
+      top: -24px;
+      right: 24px;
+      background: #fff;
+      border: 2px dashed var(--pink-primary);
+      padding: 6px 12px;
+      border-radius: 8px;
+      transform: rotate(7deg);
+      box-shadow: 0 6px 12px rgba(92, 44, 53, 0.08);
+      font-family: var(--font-note);
+      font-size: 0.95rem;
+      color: var(--pink-deep);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .stamp-postmark {
+      position: absolute;
+      top: -12px;
+      left: -16px;
+      width: 64px;
+      height: 64px;
+      border: 2px solid rgba(255, 117, 143, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-note);
+      font-size: 0.65rem;
+      color: rgba(255, 117, 143, 0.8);
+      transform: rotate(-15deg);
+      pointer-events: none;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .hero-greeting {
+      font-family: var(--font-note);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      color: var(--pink-deep);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-family: var(--font-hand);
+      font-size: clamp(2.8rem, 8vw, 4.8rem);
+      color: var(--rose-dark);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .hero-title .sparkle-text {
+      background: linear-gradient(135deg, var(--pink-deep) 0%, var(--peach-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hero-title .sparkle-text::after {
+      content: ' ✨';
+      -webkit-text-fill-color: initial;
+    }
+
+    .hero-subheading {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+    }
+
+    /* Live Days Together Counter Badge */
+    .love-ticker-card {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--bg-peach);
+      border: 2px solid rgba(255, 117, 143, 0.3);
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 36px;
+      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.12);
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .ticker-num {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+    }
+
+    .ticker-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--rose-accent);
+    }
+
+    .ticker-divider {
+      color: var(--pink-soft);
+      font-weight: bold;
+    }
+
+    /* Hero CTA Button */
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--pink-primary), var(--pink-deep));
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.35);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      border: none;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(255, 77, 109, 0.45);
+    }
+
+    .hero-cta .cta-icon {
+      font-size: 1.3rem;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.25);
+      }
+
+      28% {
+        transform: scale(1);
+      }
+
+      42% {
+        transform: scale(1.2);
+      }
+
+      70% {
+        transform: scale(1);
+      }
+    }
+
+    /* ==========================================================================
+       3. REASONS WHY I LOVE YOU (Interactive Flip & Reveal Cards)
+       ========================================================================== */
+    .reasons-section {
+      background: linear-gradient(180deg, transparent 0%, rgba(255, 236, 229, 0.4) 100%);
+    }
+
+    .reasons-toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 28px;
+    }
+
+    /* Flip Card Container */
+    .reason-card {
+      perspective: 1000px;
+      height: 320px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .reason-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: var(--radius-md);
+    }
+
+    .reason-card.is-flipped .reason-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .reason-card-front,
+    .reason-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: var(--radius-md);
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    /* Front side styling */
+    .reason-card-front {
+      background: var(--bg-card);
+      border: 2px solid var(--pink-soft);
+    }
+
+    .reason-card:hover .reason-card-front {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--pink-primary);
+    }
+
+    .reason-icon-bubble {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--bg-peach);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 16px;
+      border: 2px dashed var(--pink-primary);
+      transition: transform 0.3s ease;
+    }
+
+    .reason-card:hover .reason-icon-bubble {
+      transform: scale(1.1) rotate(6deg);
+    }
+
+    .reason-number {
+      font-family: var(--font-note);
+      font-size: 1.1rem;
+      color: var(--pink-deep);
+      margin-bottom: 4px;
+    }
+
+    .reason-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--rose-dark);
+      margin-bottom: 14px;
+    }
+
+    .flip-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      background: var(--bg-cream);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-top: auto;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Back side styling */
+    .reason-card-back {
+      background: linear-gradient(135deg, #fff5f7, #fff0f3);
+      border: 2px solid var(--pink-primary);
+      transform: rotateY(180deg);
+      text-align: center;
+    }
+
+    .reason-back-doodle {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .reason-back-title {
+      font-family: var(--font-hand);
+      font-size: 1.6rem;
+      color: var(--pink-deep);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .reason-back-desc {
+      font-family: var(--font-note);
+      font-size: 1.15rem;
+      color: var(--text-main);
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .reason-back-badge {
+      font-size: 0.8rem;
+      background: #fff;
+      color: var(--rose-accent);
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--pink-soft);
+      margin-top: auto;
+    }
+
+    /* ==========================================================================
+       4. PHOTO GALLERY (Scattered Polaroids with Washi Tape & Backstories)
+       ========================================================================== */
+    .gallery-section {
+      position: relative;
+    }
+
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 36px;
+      padding: 20px 0;
+    }
+
+    .polaroid-card {
+      background: #ffffff;
+      padding: 16px 16px 24px 16px;
+      border-radius: 4px;
+      box-shadow: var(--shadow-polaroid);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      position: relative;
+      text-align: center;
+    }
+
+    /* Scattered tilts */
+    .polaroid-card:nth-child(1) {
+      transform: rotate(-3deg);
+    }
+
+    .polaroid-card:nth-child(2) {
+      transform: rotate(2.5deg);
+    }
+
+    .polaroid-card:nth-child(3) {
+      transform: rotate(-2deg);
+    }
+
+    .polaroid-card:nth-child(4) {
+      transform: rotate(3.5deg);
+    }
+
+    .polaroid-card:nth-child(5) {
+      transform: rotate(-1.5deg);
+    }
+
+    .polaroid-card:nth-child(6) {
+      transform: rotate(2deg);
+    }
+
+    .polaroid-card:hover {
+      transform: translateY(-10px) rotate(0deg) scale(1.04) !important;
+      box-shadow: 0 25px 45px rgba(92, 44, 53, 0.18);
+      z-index: 20;
+    }
+
+    .polaroid-img-wrapper {
+      width: 100%;
+      height: 240px;
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--bg-peach);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .polaroid-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .polaroid-card:hover .polaroid-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    .polaroid-caption {
+      margin-top: 14px;
+      font-family: var(--font-hand);
+      font-size: 1.45rem;
+      color: var(--rose-dark);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .polaroid-date {
+      font-family: var(--font-note);
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-top: 4px;
+      display: block;
+    }
+
+    .polaroid-corner-sticker {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      font-size: 1.3rem;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       5. INTERACTIVE SURPRISE BOX (Love Meter, Hug Dispenser & Coupon)
+       ========================================================================== */
+    .surprise-section {
+      background: linear-gradient(180deg, rgba(255, 236, 229, 0.4) 0%, rgba(244, 236, 255, 0.5) 100%);
+    }
+
+    .surprise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 28px;
+    }
+
+    .interactive-card {
+      background: #ffffff;
+      border: 2px solid var(--pink-soft);
+      border-radius: var(--radius-lg);
+      padding: 36px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .interactive-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--pink-primary);
+    }
+
+    .surprise-badge {
+      position: absolute;
+      top: -14px;
+      background: var(--bg-soft-yellow);
+      border: 1.5px solid var(--gold-accent);
+      color: #7a5200;
+      font-family: var(--font-note);
+      font-size: 0.95rem;
+      padding: 4px 14px;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .surprise-icon-top {
+      font-size: 3rem;
+      margin: 12px 0;
+      animation: gentleWiggle 3s ease-in-out infinite;
+    }
+
+    @keyframes gentleWiggle {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      25% {
+        transform: rotate(-6deg);
+      }
+
+      75% {
+        transform: rotate(6deg);
+      }
+    }
+
+    .surprise-card-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--rose-dark);
+      margin-bottom: 8px;
+    }
+
+    .surprise-card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Hug Dispenser Output */
+    .hug-output-bubble {
+      min-height: 80px;
+      width: 100%;
+      background: var(--bg-peach);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-hand);
+      font-size: 1.35rem;
+      color: var(--rose-dark);
+      font-weight: 700;
+      margin-bottom: 20px;
+      border: 1px dashed var(--pink-primary);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Love-O-Meter Component */
+    .meter-display-box {
+      width: 100%;
+      background: var(--bg-cream);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      margin-bottom: 20px;
+      border: 1px solid var(--pink-soft);
+    }
+
+    .meter-val-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .meter-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--rose-accent);
+    }
+
+    .meter-pct {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+    }
+
+    .meter-bar-track {
+      width: 100%;
+      height: 16px;
+      background: #f0e4e7;
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .meter-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, var(--pink-soft), var(--pink-primary), var(--pink-deep));
+      border-radius: var(--radius-pill);
+      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    /* Secret Love Coupon / Scratch Card */
+    .coupon-box {
+      width: 100%;
+      background: #fff;
+      border: 2px dashed var(--pink-primary);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coupon-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #ffd7df, #ffe3d8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 2;
+    }
+
+    .coupon-overlay.is-revealed {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.1);
+    }
+
+    .coupon-secret-content {
+      font-family: var(--font-hand);
+      font-size: 1.35rem;
+      color: var(--rose-dark);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .coupon-code {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--pink-deep);
+      margin-top: 6px;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    /* Interactive Buttons */
+    .magic-btn {
+      background: var(--bg-peach);
+      border: 2px solid var(--pink-primary);
+      color: var(--rose-dark);
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.15);
+      margin-top: auto;
+    }
+
+    .magic-btn:hover {
+      background: var(--pink-primary);
+      color: #fff;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+    }
+
+    .magic-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* ==========================================================================
+       6. CLOSING LETTER & WAX SEAL
+       ========================================================================== */
+    .letter-section {
+      padding-bottom: 100px;
+    }
+
+    .letter-parchment {
+      background: #fffdfa;
+      border: 1px solid rgba(255, 117, 143, 0.2);
+      border-radius: var(--radius-lg);
+      padding: clamp(36px, 7vw, 70px) clamp(24px, 6vw, 60px);
+      box-shadow: 0 20px 50px rgba(92, 44, 53, 0.09);
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .letter-salutation {
+      font-family: var(--font-hand);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: var(--pink-deep);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .letter-body {
+      font-family: var(--font-note);
+      font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+      color: var(--text-main);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .letter-body p {
+      margin-bottom: 18px;
+    }
+
+    .letter-signature-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 36px;
+      text-align: right;
+    }
+
+    .letter-signoff {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .letter-sign-name {
+      font-family: var(--font-hand);
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      color: var(--rose-dark);
+      font-weight: 700;
+      transform: rotate(-3deg);
+      margin-top: 4px;
+    }
+
+    /* Wax Seal Stamp Interactive Element */
+    .wax-seal-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 40px;
+      gap: 10px;
+    }
+
+    .wax-seal-btn {
+      width: 78px;
+      height: 78px;
+      background: radial-gradient(circle at 35% 35%, #ff4d6d, #b51739);
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      box-shadow:
+        0 8px 20px rgba(181, 23, 57, 0.4),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.25),
+        inset 0 4px 8px rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      user-select: none;
+    }
+
+    .wax-seal-btn:hover {
+      transform: scale(1.12) rotate(8deg);
+      box-shadow:
+        0 12px 28px rgba(181, 23, 57, 0.55),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .wax-seal-btn:active {
+      transform: scale(0.95);
+    }
+
+    .wax-seal-hint {
+      font-family: var(--font-note);
+      font-size: 1.1rem;
+      color: var(--rose-accent);
+    }
+
+    /* Send Love Back Floating Reaction Pill */
+    .reply-heart-section {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .send-love-btn {
+      background: #ffffff;
+      border: 2px solid var(--pink-primary);
+      padding: 14px 32px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(255, 117, 143, 0.2);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .send-love-btn:hover {
+      background: var(--pink-deep);
+      color: #ffffff;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(255, 77, 109, 0.35);
+    }
+
+    .love-count-badge {
+      background: var(--bg-peach);
+      color: var(--rose-dark);
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+    }
+
+    .send-love-btn:hover .love-count-badge {
+      background: #fff;
+      color: var(--pink-deep);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 20px 40px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ==========================================================================
+       7. LIGHTBOX & MODAL
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(61, 35, 40, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-polaroid-box {
+      background: #ffffff;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 8px;
+      padding: 20px 20px 28px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      transform: scale(0.9) rotate(-1deg);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: center;
+    }
+
+    .modal-overlay.is-active .modal-polaroid-box {
+      transform: scale(1) rotate(0deg);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 38px;
+      height: 38px;
+      background: #ffffff;
+      border: 2px solid var(--pink-primary);
+      border-radius: 50%;
+      color: var(--rose-dark);
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      transform: scale(1.15) rotate(90deg);
+      background: var(--pink-soft);
+    }
+
+    .modal-img-wrap {
+      width: 100%;
+      height: 320px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--bg-peach);
+    }
+
+    .modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-caption {
+      font-family: var(--font-hand);
+      font-size: 1.8rem;
+      color: var(--rose-dark);
+      margin-top: 14px;
+      font-weight: 700;
+    }
+
+    .modal-story {
+      font-family: var(--font-note);
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* Floating Heart Tap Anim */
+    .floating-tap-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 2rem;
+      z-index: 9999;
+      animation: flyUpAndFade 1.2s ease-out forwards;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes flyUpAndFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+
+      50% {
+        opacity: 0.9;
+        transform: translate(-50%, -100px) scale(1.3) rotate(-15deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -180px) scale(1.6) rotate(15deg);
+      }
+    }
+
+    /* Custom Cursor Trail Sparkle (Desktop) */
+    .cursor-sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pink-primary);
+      pointer-events: none;
+      z-index: 9998;
+      box-shadow: 0 0 10px var(--pink-deep);
+      animation: sparkleShrink 0.6s linear forwards;
+    }
+
+    @keyframes sparkleShrink {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .top-controls {
+        top: 12px;
+        right: 12px;
+      }
+
+      .pill-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+
+      .hero-card {
+        padding: 40px 18px 32px;
+      }
+
+      .postage-stamp {
+        top: -20px;
+        right: 10px;
+        font-size: 0.85rem;
+        padding: 4px 8px;
+      }
+
+      .reason-card {
+        height: 300px;
+      }
+
+      .polaroid-img-wrapper {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Background Ambient Particles Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Top Floating Utility Controls -->
+  <div class="top-controls">
+    <button class="pill-btn" id="audio-toggle-btn" title="Toggle cute sound effects" aria-label="Toggle Sound">
+      <span id="audio-icon">🔔</span>
+      <span id="audio-text">Sound: ON</span>
+    </button>
+    <button class="pill-btn" id="music-theme-btn" title="Rain sparkles & hearts" aria-label="Shower Love">
+      <span>✨ Shower Love</span>
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-card">
+        <!-- Cute washi tape -->
+        <div class="washi-tape top-center yellow"></div>
+
+        <!-- Postage stamp with postmark -->
+        <div class="postage-stamp">
+          <span>💌 SPECIAL DELIVERY</span>
+          <div class="stamp-postmark">Air Mail<br>Express<br>100% LOVE</div>
+        </div>
+
+        <p class="hero-greeting" id="hero-greeting-text">Dear Lily 💕</p>
+
+        <h1 class="hero-title">
+          You Make My Whole World <br />
+          <span class="sparkle-text">So Much Brighter</span>
+        </h1>
+
+        <p class="hero-subheading">
+          Just a little handmade digital love letter to remind you of how deeply adored, endlessly cherished, and
+          ridiculously loved you are every single day.
+        </p>
+
+        <!-- Live Love Duration Ticker -->
+        <div class="love-ticker-card" title="Count of days we've shared together">
+          <div class="ticker-item">
+            <span class="ticker-num" id="ticker-days">365</span>
+            <span class="ticker-label">Days</span>
+          </div>
+          <span class="ticker-divider">•</span>
+          <div class="ticker-item">
+            <span class="ticker-num" id="ticker-hours">12</span>
+            <span class="ticker-label">Hours</span>
+          </div>
+          <span class="ticker-divider">•</span>
+          <div class="ticker-item">
+            <span class="ticker-num" id="ticker-mins">48</span>
+            <span class="ticker-label">Mins</span>
+          </div>
+          <span class="ticker-divider">•</span>
+          <div class="ticker-item">
+            <span class="ticker-num" id="ticker-secs">00</span>
+            <span class="ticker-label">Secs of loving you</span>
+          </div>
+        </div>
+
+        <div>
+          <a href="#reasons" class="hero-cta" id="start-journey-btn">
+            <span>Unwrap The Letter</span>
+            <span class="cta-icon">💖</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 2: REASONS WHY I LOVE YOU (Flip Cards)
+       ========================================================================== -->
+  <section class="reasons-section" id="reasons">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>💌</span> Little Secrets
+        </div>
+        <h2 class="section-title">
+          Reasons Why I <span class="handwritten">Adore You</span>
+        </h2>
+        <p class="section-sub">
+          Tap or click any card below to flip it over and uncover the sweet little reason inside.
+        </p>
+      </div>
+
+      <div class="reasons-toolbar">
+        <button class="pill-btn" id="flip-all-btn">
+          <span>🔄 Flip All Cards</span>
+        </button>
+        <button class="pill-btn" id="shuffle-reason-btn">
+          <span>🎲 Pick Random Reason</span>
+        </button>
+      </div>
+
+      <div class="reasons-grid" id="reasons-container">
+        <!-- Reason Cards are injected dynamically by JavaScript for easy customization -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: PHOTO GALLERY (Scattered Polaroids)
+       ========================================================================== -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>📸</span> Scrapbook Memories
+        </div>
+        <h2 class="section-title">
+          Our Favorite <span class="handwritten">Moments</span>
+        </h2>
+        <p class="section-sub">
+          Little snapshots frozen in time. Click any polaroid photo to look closer and read our memory backstory.
+        </p>
+      </div>
+
+      <div class="polaroid-grid" id="polaroid-container">
+        <!-- Polaroid cards are rendered via JS for easy image & caption customization -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: INTERACTIVE SURPRISE BOX
+       ========================================================================== -->
+  <section class="surprise-section" id="surprises">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span>🎁</span> Playful Surprises
+        </div>
+        <h2 class="section-title">
+          A Little Box Of <span class="handwritten">Delight</span>
+        </h2>
+        <p class="section-sub">
+          Just some interactive buttons crafted to make you smile, blush, and feel extra loved!
+        </p>
+      </div>
+
+      <div class="surprise-grid">
+        <!-- 1. Virtual Hug & Compliment Machine -->
+        <div class="interactive-card">
+          <div class="washi-tape top-left mint"></div>
+          <div class="surprise-badge">Instant Comfort 🧸</div>
+          <div class="surprise-icon-top">🤗</div>
+          <h3 class="surprise-card-title">Virtual Hug Dispenser</h3>
+          <p class="surprise-card-desc">Need a warm hug or a reminder of how wonderful you are? Press the button below!
+          </p>
+
+          <div class="hug-output-bubble" id="hug-display">
+            "Sending you the biggest, warmest, coziest hug right now! 💕"
+          </div>
+
+          <button class="magic-btn" id="hug-btn">
+            <span>✨ Dispense Warm Hug</span>
+          </button>
+        </div>
+
+        <!-- 2. Overclocked Love-O-Meter -->
+        <div class="interactive-card">
+          <div class="washi-tape top-right yellow"></div>
+          <div class="surprise-badge">System Status ⚡</div>
+          <div class="surprise-icon-top">📈</div>
+          <h3 class="surprise-card-title">The Love-O-Meter</h3>
+          <p class="surprise-card-desc">Warning: Measuring my affection for you might cause total system overload.</p>
+
+          <div class="meter-display-box">
+            <div class="meter-val-row">
+              <span class="meter-label">Affection Level:</span>
+              <span class="meter-pct" id="meter-num">100%</span>
+            </div>
+            <div class="meter-bar-track">
+              <div class="meter-bar-fill" id="meter-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <button class="magic-btn" id="overcharge-love-btn">
+            <span>🚀 Boost Love to 1000%</span>
+          </button>
+        </div>
+
+        <!-- 3. Secret Scratch-Off Love Coupon -->
+        <div class="interactive-card">
+          <div class="washi-tape top-left peach"></div>
+          <div class="surprise-badge">Golden Ticket 🎟️</div>
+          <div class="surprise-icon-top">💌</div>
+          <h3 class="surprise-card-title">Secret Love Coupon</h3>
+          <p class="surprise-card-desc">Tap the shiny ribbon below to scratch off and claim your custom love voucher!
+          </p>
+
+          <div class="coupon-box" id="coupon-box">
+            <div class="coupon-overlay" id="coupon-cover">
+              <span style="font-size: 1.5rem;">🎀</span>
+              <span
+                style="font-family: var(--font-note); font-size: 1.1rem; color: var(--rose-dark); font-weight: bold;">Tap
+                To Scratch & Reveal</span>
+            </div>
+            <div class="coupon-secret-content" id="coupon-secret-text">
+              ✨ Redeemable for: 1 Fancy Romantic Dinner Date + Unlimited Warm Forehead Kisses! ✨
+            </div>
+            <span class="coupon-code">VOUCHER #LOVE-FOREVER-NO-EXPIRATION</span>
+          </div>
+
+          <button class="magic-btn" id="new-coupon-btn">
+            <span>🎲 New Secret Coupon</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: CLOSING LETTER & WAX SEAL
+       ========================================================================== -->
+  <section class="letter-section" id="closing-letter">
+    <div class="container">
+      <div class="letter-parchment">
+        <div class="washi-tape top-center peach"></div>
+
+        <h3 class="letter-salutation">My Dearest,</h3>
+
+        <div class="letter-body">
+          <p>
+            Thank you for being my favorite part of every day. Thank you for the laughs that make my stomach hurt, for
+            the comfortable silences when words aren’t needed, and for always being my safe place to land.
+          </p>
+          <p>
+            No matter where life takes us or what adventures lie ahead, having you by my side makes everything magical.
+            You are my best friend, my greatest adventure, and my absolute favorite person in the whole universe.
+          </p>
+          <p>
+            I love you today, tomorrow, and in all the tomorrows that follow.
+          </p>
+        </div>
+
+        <div class="letter-signature-block">
+          <span class="letter-signoff">Forever & always yours,</span>
+          <span class="letter-sign-name" id="signature-name">Your Favorite Human 💕</span>
+        </div>
+
+        <!-- Interactive Wax Seal -->
+        <div class="wax-seal-wrapper">
+          <button class="wax-seal-btn" id="wax-seal-button" title="Click to seal with a kiss!"
+            aria-label="Wax Seal Stamp">
+            <span>💋</span>
+          </button>
+          <span class="wax-seal-hint">Tap wax seal to stamp with love</span>
+        </div>
+
+        <!-- Send Love Back Floating Button -->
+        <div class="reply-heart-section">
+          <button class="send-love-btn" id="send-love-btn">
+            <span>Send Love Back</span>
+            <span>💖</span>
+            <span class="love-count-badge" id="love-sent-count">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Handcrafted with infinite love & care • Made just for you 💕</p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       POLAROID ZOOM LIGHTBOX MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="gallery-modal" aria-hidden="true">
+    <div class="modal-polaroid-box">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">×</button>
+      <div class="modal-img-wrap">
+        <img id="modal-img" src="" alt="Memory snapshot" />
+      </div>
+      <h4 class="modal-caption" id="modal-caption">Memory Title</h4>
+      <p class="modal-story" id="modal-story">Backstory memory text will appear here.</p>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC & CONFIGURATION
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       1. EDITABLE CUSTOMIZATION DATA
+       Change any text, names, dates, or photos below!
+       ========================================================================== */
+    const LOVE_LETTER_CONFIG = {
+      // Recipient & Sender Name
+      recipientName: "Lily 💕",
+      senderName: "With All My Heart 💕",
+
+      // Starting Date for the Love Counter (Year, MonthIndex 0-11, Day)
+      // Example: new Date(2023, 1, 14) -> Feb 14, 2023
+      relationshipStartDate: new Date(2023, 1, 14),
+
+      // Reasons Why I Love You Cards
+      reasons: [
+        {
+          id: 1,
+          icon: "☕",
+          title: "The Way You Laugh",
+          doodle: "😂✨",
+          backTitle: "Pure Joy",
+          backDesc: "That genuine, snorty, head-thrown-back laugh of yours that immediately makes everyone around you smile.",
+          tag: "Unfiltered Happiness"
+        },
+        {
+          id: 2,
+          icon: "🌙",
+          title: "Late Night Talks",
+          doodle: "🌌🛋️",
+          backTitle: "Our Own World",
+          backDesc: "Whispering about our wildest dreams, random childhood memories, and silly theories until 2 in the morning.",
+          tag: "Core Memories"
+        },
+        {
+          id: 3,
+          icon: "🍕",
+          title: "Our Food Adventures",
+          doodle: "🍜😋",
+          backTitle: "My Favorite Foodie",
+          backDesc: "Stealing each other's fries and doing that little happy dance whenever delicious food arrives at our table.",
+          tag: "Best Partner"
+        },
+        {
+          id: 4,
+          icon: "🧸",
+          title: "Your Cozy Hugs",
+          doodle: "🫂💖",
+          backTitle: "My Safe Place",
+          backDesc: "How all my stress melts away the second you wrap your arms around me and bury your face in my shoulder.",
+          tag: "Pure Peace"
+        },
+        {
+          id: 5,
+          icon: "✨",
+          title: "Your Kind Heart",
+          doodle: "🌸🕊️",
+          backTitle: "Truly Special",
+          backDesc: "The gentle, thoughtful way you care for animals, your friends, and every little living creature.",
+          tag: "Pure Soul"
+        },
+        {
+          id: 6,
+          icon: "🚗",
+          title: "Silly Car Karaoke",
+          doodle: "🎶🎤",
+          backTitle: "Off-Key Magic",
+          backDesc: "Singing at the top of our lungs with the windows down, hitting all the wrong notes with complete confidence.",
+          tag: "Unapologetic Fun"
+        }
+      ],
+
+      // =========================================================
+      // 📸 YOUR PHOTOS — HOW TO ADD THEM:
+      //
+      // 1. Create a folder called "photos" next to index.html
+      //    (i.e.  d:\lili\photos\ )
+      // 2. Copy your image files into that folder.
+      //    They can be .jpg, .jpeg, .png, .webp — any size.
+      // 3. In each entry below, set  image: "photos/your-filename.jpg"
+      //    replacing "your-filename.jpg" with the actual file name.
+      // 4. Update title, date, sticker emoji, and story to match.
+      // 5. Add or remove {} blocks to show as many photos as you like.
+      // =========================================================
+      photos: [
+        {
+          id: 1,
+          title: "Our First Memory Together",          // ← edit this
+          date: "August 2023",                         // ← edit this
+          sticker: "🌅",                               // ← any emoji
+          image: "photos/photo1.jpg",                  // ← your file in photos/
+          story: "Write the sweet backstory for this memory here."  // ← edit
+        },
+        {
+          id: 2,
+          title: "Our Favourite Adventure",
+          date: "October 2023",
+          sticker: "🌿",
+          image: "photos/photo2.jpg",
+          story: "Write the sweet backstory for this memory here."
+        },
+        {
+          id: 3,
+          title: "A Cozy Day Together",
+          date: "December 2023",
+          sticker: "☕",
+          image: "photos/photo3.jpg",
+          story: "Write the sweet backstory for this memory here."
+        },
+        {
+          id: 4,
+          title: "Under The Stars",
+          date: "April 2024",
+          sticker: "⭐",
+          image: "photos/photo4.jpg",
+          story: "Write the sweet backstory for this memory here."
+        }
+        // ← Add more photos by copying a { } block above and incrementing id!
+      ],
+
+      // Hug & Compliment Messages
+      hugMessages: [
+        "Sending you the biggest, warmest, coziest hug right now! 💕",
+        "You are so deeply appreciated, just exactly as you are. 🌸",
+        "If you could see yourself through my eyes, you'd never doubt how amazing you are! ✨",
+        "Here is an emergency dose of 1,000,000 gentle forehead kisses! 💋",
+        "I'm so proud of you and so thankful you exist in my life. 🧸",
+        "Take a deep breath — you are loved beyond words today. 💖"
+      ],
+
+      // Secret Love Coupons
+      coupons: [
+        "✨ Redeemable for: 1 Fancy Romantic Dinner Date + Unlimited Forehead Kisses! ✨",
+        "✨ Redeemable for: A Relaxing 30-Minute Back & Shoulder Massage! 💆‍♀️ ✨",
+        "✨ Redeemable for: Control of the TV Remote & Playlist All Weekend Long! 🎬 ✨",
+        "✨ Redeemable for: Breakfast in Bed with your favorite warm coffee/tea! 🥞☕ ✨",
+        "✨ Redeemable for: 1 Guilt-Free Midnight Dessert Run for anything you crave! 🍦 ✨"
+      ]
+    };
+
+    /* ==========================================================================
+       2. SYNTHESIZED WEB AUDIO (Chimes, Pops & Seals - Zero external audio files)
+       ========================================================================== */
+    class CuteSoundSynthesizer {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+
+      initContext() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playPop() {
+        if (!this.enabled) return;
+        this.initContext();
+        if (!this.ctx) return;
+
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.08);
+
+          gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.09);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.1);
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+
+      playChime() {
+        if (!this.enabled) return;
+        this.initContext();
+        if (!this.ctx) return;
+
+        try {
+          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+          notes.forEach((freq, index) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + index * 0.06);
+
+            gain.gain.setValueAtTime(0.15, this.ctx.currentTime + index * 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + index * 0.06 + 0.35);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start(this.ctx.currentTime + index * 0.06);
+            osc.stop(this.ctx.currentTime + index * 0.06 + 0.4);
+          });
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+
+      playCelebration() {
+        if (!this.enabled) return;
+        this.initContext();
+        if (!this.ctx) return;
+
+        try {
+          const melody = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+          melody.forEach((f, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(f, this.ctx.currentTime + i * 0.08);
+
+            gain.gain.setValueAtTime(0.2, this.ctx.currentTime + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.08 + 0.45);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start(this.ctx.currentTime + i * 0.08);
+            osc.stop(this.ctx.currentTime + i * 0.08 + 0.5);
+          });
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+    }
+
+    const soundSynth = new CuteSoundSynthesizer();
+
+    /* ==========================================================================
+       3. FLOATING PARTICLE CANVAS (Subtle hearts & sparkles)
+       ========================================================================== */
+    class FloatingParticleCanvas {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.symbols = ['💖', '✨', '🌸', '⭐', '💕', '🧸'];
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        this.createParticles(24);
+        this.animate = this.animate.bind(this);
+        requestAnimationFrame(this.animate);
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+
+      createParticles(count) {
+        for (let i = 0; i < count; i++) {
+          this.particles.push({
+            x: Math.random() * this.canvas.width,
+            y: Math.random() * this.canvas.height,
+            size: Math.random() * 14 + 12,
+            speedY: Math.random() * 0.6 + 0.2,
+            speedX: (Math.random() - 0.5) * 0.4,
+            opacity: Math.random() * 0.4 + 0.2,
+            symbol: this.symbols[Math.floor(Math.random() * this.symbols.length)],
+            rotation: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.02
+          });
+        }
+      }
+
+      animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        for (let p of this.particles) {
+          p.y -= p.speedY;
+          p.x += p.speedX;
+          p.rotation += p.rotSpeed;
+
+          if (p.y < -30) {
+            p.y = this.canvas.height + 20;
+            p.x = Math.random() * this.canvas.width;
+          }
+
+          this.ctx.save();
+          this.ctx.translate(p.x, p.y);
+          this.ctx.rotate(p.rotation);
+          this.ctx.globalAlpha = p.opacity;
+          this.ctx.font = `${p.size}px serif`;
+          this.ctx.textAlign = 'center';
+          this.ctx.textBaseline = 'middle';
+          this.ctx.fillText(p.symbol, 0, 0);
+          this.ctx.restore();
+        }
+
+        requestAnimationFrame(this.animate);
+      }
+    }
+
+    /* ==========================================================================
+       4. INITIALIZE APP & EVENT HANDLERS
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Canvas
+      new FloatingParticleCanvas('particle-canvas');
+
+      // 2. Set Names in Document
+      document.getElementById('hero-greeting-text').textContent = `Dear ${LOVE_LETTER_CONFIG.recipientName}`;
+      document.getElementById('signature-name').textContent = LOVE_LETTER_CONFIG.senderName;
+
+      // 3. Live Days Counter Calculation
+      function updateLiveCounter() {
+        const now = new Date();
+        const diffMs = now - LOVE_LETTER_CONFIG.relationshipStartDate;
+        if (diffMs > 0) {
+          const totalSeconds = Math.floor(diffMs / 1000);
+          const days = Math.floor(totalSeconds / (3600 * 24));
+          const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+          const mins = Math.floor((totalSeconds % 3600) / 60);
+          const secs = totalSeconds % 60;
+
+          document.getElementById('ticker-days').textContent = days;
+          document.getElementById('ticker-hours').textContent = String(hours).padStart(2, '0');
+          document.getElementById('ticker-mins').textContent = String(mins).padStart(2, '0');
+          document.getElementById('ticker-secs').textContent = String(secs).padStart(2, '0');
+        }
+      }
+      setInterval(updateLiveCounter, 1000);
+      updateLiveCounter();
+
+      // 4. Render Reasons Cards
+      const reasonsContainer = document.getElementById('reasons-container');
+      reasonsContainer.innerHTML = LOVE_LETTER_CONFIG.reasons.map((r, idx) => `
+        <div class="reason-card" data-index="${idx}" tabindex="0" role="button" aria-label="Reason ${r.id}: ${r.title}">
+          <div class="washi-tape top-center ${idx % 2 === 0 ? 'peach' : 'yellow'}"></div>
+          <div class="reason-card-inner">
+            <div class="reason-card-front">
+              <div class="reason-icon-bubble">${r.icon}</div>
+              <span class="reason-number">Reason #${r.id}</span>
+              <h3 class="reason-title">${r.title}</h3>
+              <div class="flip-hint"><span>Tap to uncover ✨</span></div>
+            </div>
+            <div class="reason-card-back">
+              <div class="reason-back-doodle">${r.doodle}</div>
+              <h4 class="reason-back-title">${r.backTitle}</h4>
+              <p class="reason-back-desc">"${r.backDesc}"</p>
+              <span class="reason-back-badge">${r.tag}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Card Flip Click Handlers
+      document.querySelectorAll('.reason-card').forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('is-flipped');
+          soundSynth.playPop();
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.classList.toggle('is-flipped');
+            soundSynth.playPop();
+          }
+        });
+      });
+
+      // Flip All Cards Button
+      let allFlipped = false;
+      document.getElementById('flip-all-btn').addEventListener('click', () => {
+        allFlipped = !allFlipped;
+        document.querySelectorAll('.reason-card').forEach((card, index) => {
+          setTimeout(() => {
+            if (allFlipped) {
+              card.classList.add('is-flipped');
+            } else {
+              card.classList.remove('is-flipped');
+            }
+            soundSynth.playPop();
+          }, index * 80);
+        });
+      });
+
+      // Shuffle Random Reason Button
+      document.getElementById('shuffle-reason-btn').addEventListener('click', () => {
+        const cards = document.querySelectorAll('.reason-card');
+        const randomIdx = Math.floor(Math.random() * cards.length);
+        cards.forEach(c => c.classList.remove('is-flipped'));
+        setTimeout(() => {
+          cards[randomIdx].classList.add('is-flipped');
+          cards[randomIdx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          soundSynth.playChime();
+          triggerMiniConfetti(cards[randomIdx]);
+        }, 200);
+      });
+
+      // 5. Render Polaroid Gallery
+      const polaroidContainer = document.getElementById('polaroid-container');
+      polaroidContainer.innerHTML = LOVE_LETTER_CONFIG.photos.map((p, idx) => `
+        <div class="polaroid-card" data-photo-id="${p.id}" tabindex="0" role="button" aria-label="Photo: ${p.title}">
+          <div class="washi-tape top-${idx % 2 === 0 ? 'left' : 'right'} ${idx % 3 === 0 ? 'yellow' : idx % 3 === 1 ? 'peach' : 'mint'}"></div>
+          <div class="polaroid-img-wrapper">
+            <img src="${p.image}" alt="${p.title}" loading="lazy" />
+          </div>
+          <h4 class="polaroid-caption">${p.title}</h4>
+          <span class="polaroid-date">${p.date}</span>
+          <span class="polaroid-corner-sticker">${p.sticker}</span>
+        </div>
+      `).join('');
+
+      // Polaroid Lightbox Modal
+      const modal = document.getElementById('gallery-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalCaption = document.getElementById('modal-caption');
+      const modalStory = document.getElementById('modal-story');
+      const modalClose = document.getElementById('modal-close-btn');
+
+      document.querySelectorAll('.polaroid-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const photoId = parseInt(card.getAttribute('data-photo-id'));
+          const item = LOVE_LETTER_CONFIG.photos.find(p => p.id === photoId);
+          if (item) {
+            modalImg.src = item.image;
+            modalCaption.textContent = item.title;
+            modalStory.textContent = item.story;
+            modal.classList.add('is-active');
+            soundSynth.playPop();
+          }
+        });
+      });
+
+      modalClose.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+        soundSynth.playPop();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('is-active');
+        }
+      });
+
+      // 6. Interactive Hug Dispenser
+      const hugBtn = document.getElementById('hug-btn');
+      const hugDisplay = document.getElementById('hug-display');
+      let hugIndex = 0;
+
+      hugBtn.addEventListener('click', (e) => {
+        hugIndex = (hugIndex + 1) % LOVE_LETTER_CONFIG.hugMessages.length;
+        hugDisplay.style.opacity = '0';
+        hugDisplay.style.transform = 'scale(0.95)';
+        soundSynth.playChime();
+        triggerConfettiBurst(e.clientX, e.clientY);
+
+        setTimeout(() => {
+          hugDisplay.textContent = LOVE_LETTER_CONFIG.hugMessages[hugIndex];
+          hugDisplay.style.opacity = '1';
+          hugDisplay.style.transform = 'scale(1)';
+        }, 200);
+      });
+
+      // 7. Love-O-Meter Overclocker
+      const loveBtn = document.getElementById('overcharge-love-btn');
+      const meterNum = document.getElementById('meter-num');
+      const meterFill = document.getElementById('meter-fill');
+      let loveLevel = 100;
+
+      loveBtn.addEventListener('click', () => {
+        loveLevel += 150;
+        if (loveLevel > 1000) {
+          loveLevel = 1000;
+        }
+
+        meterNum.textContent = `${loveLevel}% (MAX OVERFLOW!)`;
+        meterNum.style.color = '#ff1493';
+        meterFill.style.width = '100%';
+        meterFill.style.background = 'linear-gradient(90deg, #ff007f, #ff758f, #ffd700)';
+
+        soundSynth.playCelebration();
+        triggerSuperConfetti();
+
+        if (loveLevel >= 1000) {
+          loveBtn.innerHTML = `<span>🔥 OVERLOADED WITH LOVE! 💖</span>`;
+          loveBtn.disabled = true;
+        }
+      });
+
+      // 8. Scratch-Off Coupon
+      const couponCover = document.getElementById('coupon-cover');
+      const couponSecretText = document.getElementById('coupon-secret-text');
+      const newCouponBtn = document.getElementById('new-coupon-btn');
+      let couponIndex = 0;
+
+      couponCover.addEventListener('click', () => {
+        couponCover.classList.add('is-revealed');
+        soundSynth.playCelebration();
+        triggerConfettiBurst(window.innerWidth / 2, window.innerHeight / 2);
+      });
+
+      newCouponBtn.addEventListener('click', () => {
+        couponIndex = (couponIndex + 1) % LOVE_LETTER_CONFIG.coupons.length;
+        couponSecretText.textContent = LOVE_LETTER_CONFIG.coupons[couponIndex];
+        couponCover.classList.remove('is-revealed');
+        soundSynth.playPop();
+      });
+
+      // 9. Wax Seal Stamp
+      const waxSealBtn = document.getElementById('wax-seal-button');
+      waxSealBtn.addEventListener('click', (e) => {
+        soundSynth.playCelebration();
+        triggerConfettiBurst(e.clientX, e.clientY);
+        spawnFloatingHeart(e.clientX, e.clientY, '💋');
+        waxSealBtn.style.transform = 'scale(0.9) rotate(15deg)';
+        setTimeout(() => {
+          waxSealBtn.style.transform = '';
+        }, 300);
+      });
+
+      // 10. Send Love Back Button
+      const sendLoveBtn = document.getElementById('send-love-btn');
+      const loveSentBadge = document.getElementById('love-sent-count');
+      let loveCount = 0;
+
+      sendLoveBtn.addEventListener('click', (e) => {
+        loveCount++;
+        loveSentBadge.textContent = loveCount;
+        soundSynth.playPop();
+        spawnFloatingHeart(e.clientX, e.clientY, ['💖', '💕', '🥰', '🌸', '✨'][Math.floor(Math.random() * 5)]);
+      });
+
+      // 11. Top Bar Shower Love Button
+      document.getElementById('music-theme-btn').addEventListener('click', () => {
+        soundSynth.playCelebration();
+        triggerSuperConfetti();
+      });
+
+      // 12. Sound Toggle Button
+      const audioToggleBtn = document.getElementById('audio-toggle-btn');
+      const audioText = document.getElementById('audio-text');
+      const audioIcon = document.getElementById('audio-icon');
+
+      audioToggleBtn.addEventListener('click', () => {
+        soundSynth.enabled = !soundSynth.enabled;
+        if (soundSynth.enabled) {
+          audioText.textContent = 'Sound: ON';
+          audioIcon.textContent = '🔔';
+          soundSynth.playPop();
+        } else {
+          audioText.textContent = 'Sound: OFF';
+          audioIcon.textContent = '🔕';
+        }
+      });
+
+      // 13. Screen Tap / Click Floating Hearts Effect
+      window.addEventListener('click', (e) => {
+        // Only spawn tap heart if not clicking on interactive buttons
+        if (!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('.reason-card')) {
+          spawnFloatingHeart(e.clientX, e.clientY, '💕');
+        }
+      });
+
+      // 14. Desktop Sparkle Cursor Trail
+      let lastSparkleTime = 0;
+      window.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastSparkleTime > 60) {
+          lastSparkleTime = now;
+          createCursorSparkle(e.clientX, e.clientY);
+        }
+      });
+    });
+
+    /* ==========================================================================
+       5. HELPER ANIMATION FUNCTIONS
+       ========================================================================== */
+    function triggerConfettiBurst(x, y) {
+      if (typeof confetti === 'function') {
+        const normX = x / window.innerWidth;
+        const normY = y / window.innerHeight;
+        confetti({
+          particleCount: 40,
+          spread: 60,
+          origin: { x: normX, y: normY },
+          colors: ['#ff758f', '#ff4d6d', '#ffd7df', '#ffe3d8', '#f9bc60']
+        });
+      }
+    }
+
+    function triggerMiniConfetti(element) {
+      if (typeof confetti === 'function') {
+        const rect = element.getBoundingClientRect();
+        const x = (rect.left + rect.width / 2) / window.innerWidth;
+        const y = (rect.top + rect.height / 2) / window.innerHeight;
+        confetti({
+          particleCount: 25,
+          spread: 45,
+          origin: { x, y },
+          colors: ['#ff758f', '#ffb7c5', '#ffd166']
+        });
+      }
+    }
+
+    function triggerSuperConfetti() {
+      if (typeof confetti === 'function') {
+        const count = 200;
+        const defaults = {
+          origin: { y: 0.7 },
+          colors: ['#ff4d6d', '#ff758f', '#ffd7df', '#ffe49e', '#d8bbff']
+        };
+
+        function fire(particleRatio, opts) {
+          confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio)
+          });
+        }
+
+        fire(0.25, { spread: 26, startVelocity: 55 });
+        fire(0.2, { spread: 60 });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1, { spread: 120, startVelocity: 45 });
+      }
+    }
+
+    function spawnFloatingHeart(x, y, emoji = '💖') {
+      const heart = document.createElement('div');
+      heart.className = 'floating-tap-heart';
+      heart.textContent = emoji;
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1200);
+    }
+
+    function createCursorSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'cursor-sparkle';
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 600);
+    }
+  </script>
+</body>
+
+</html>
