@@ -383,44 +383,6 @@
       line-height: 1.65;
     }
 
-    /* Live Days Together Counter Badge */
-    .love-ticker-card {
-      display: inline-flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: var(--bg-peach);
-      border: 2px solid rgba(255, 117, 143, 0.3);
-      padding: 12px 24px;
-      border-radius: var(--radius-pill);
-      margin-bottom: 36px;
-      box-shadow: 0 4px 12px rgba(255, 117, 143, 0.12);
-    }
-
-    .ticker-item {
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-    }
-
-    .ticker-num {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--pink-deep);
-    }
-
-    .ticker-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--rose-accent);
-    }
-
-    .ticker-divider {
-      color: var(--pink-soft);
-      font-weight: bold;
-    }
 
     /* Hero CTA Button */
     .hero-cta {
@@ -633,108 +595,147 @@
     }
 
     /* ==========================================================================
-       4. PHOTO GALLERY (Scattered Polaroids with Washi Tape & Backstories)
+       4. VIDEO MEMORY SECTION
        ========================================================================== */
     .gallery-section {
       position: relative;
     }
 
-    .polaroid-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 36px;
-      padding: 20px 0;
-    }
-
-    .polaroid-card {
-      background: #ffffff;
-      padding: 16px 16px 24px 16px;
-      border-radius: 4px;
-      box-shadow: var(--shadow-polaroid);
-      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      cursor: pointer;
-      position: relative;
-      text-align: center;
-    }
-
-    /* Scattered tilts */
-    .polaroid-card:nth-child(1) {
-      transform: rotate(-3deg);
-    }
-
-    .polaroid-card:nth-child(2) {
-      transform: rotate(2.5deg);
-    }
-
-    .polaroid-card:nth-child(3) {
-      transform: rotate(-2deg);
-    }
-
-    .polaroid-card:nth-child(4) {
-      transform: rotate(3.5deg);
-    }
-
-    .polaroid-card:nth-child(5) {
-      transform: rotate(-1.5deg);
-    }
-
-    .polaroid-card:nth-child(6) {
-      transform: rotate(2deg);
-    }
-
-    .polaroid-card:hover {
-      transform: translateY(-10px) rotate(0deg) scale(1.04) !important;
-      box-shadow: 0 25px 45px rgba(92, 44, 53, 0.18);
-      z-index: 20;
-    }
-
-    .polaroid-img-wrapper {
-      width: 100%;
-      height: 240px;
-      border-radius: 2px;
-      overflow: hidden;
-      background: var(--bg-peach);
-      position: relative;
+    .video-memory-wrapper {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 28px;
+      padding: 10px 0 30px;
     }
 
-    .polaroid-img-wrapper img {
+    .video-film-frame {
+      position: relative;
+      background: #ffffff;
+      padding: 18px 18px 48px;
+      border-radius: 6px;
+      box-shadow: var(--shadow-polaroid);
+      max-width: 520px;
+      width: 100%;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .video-film-frame:hover {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow: 0 28px 55px rgba(92, 44, 53, 0.2);
+    }
+
+    .video-washi-tape {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1.5deg);
+      width: 90px;
+      height: 28px;
+      background: rgba(255, 215, 223, 0.82);
+      border-radius: 3px;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 2px 6px rgba(255, 117, 143, 0.2);
+    }
+
+    .video-player-box {
+      width: 100%;
+      border-radius: 3px;
+      overflow: hidden;
+      background: #1a0a0e;
+      position: relative;
+      aspect-ratio: 9 / 16;
+      max-height: 560px;
+    }
+
+    .video-player-box video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      display: block;
+      border-radius: 3px;
     }
 
-    .polaroid-card:hover .polaroid-img-wrapper img {
-      transform: scale(1.06);
+    /* Play overlay button */
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(92, 44, 53, 0.22);
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      border-radius: 3px;
     }
 
-    .polaroid-caption {
-      margin-top: 14px;
+    .video-play-overlay.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .play-circle {
+      width: 68px;
+      height: 68px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 24px rgba(92, 44, 53, 0.35);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      backdrop-filter: blur(6px);
+    }
+
+    .video-play-overlay:hover .play-circle {
+      transform: scale(1.18);
+    }
+
+    .video-caption-area {
+      padding-top: 14px;
+      text-align: center;
+    }
+
+    .video-caption-title {
       font-family: var(--font-hand);
-      font-size: 1.45rem;
+      font-size: 1.6rem;
       color: var(--rose-dark);
       font-weight: 700;
-      line-height: 1.2;
+      margin-bottom: 4px;
     }
 
-    .polaroid-date {
+    .video-caption-date {
       font-family: var(--font-note);
       font-size: 0.95rem;
       color: var(--text-light);
-      margin-top: 4px;
-      display: block;
     }
 
-    .polaroid-corner-sticker {
+    .video-corner-sticker {
       position: absolute;
-      bottom: 12px;
-      right: 12px;
-      font-size: 1.3rem;
+      bottom: 14px;
+      right: 16px;
+      font-size: 1.4rem;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-      pointer-events: none;
+    }
+
+    /* Heart-ribbon decoration under video */
+    .video-ribbon-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      color: var(--pink-primary);
+      font-family: var(--font-hand);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .video-ribbon-row .hr-line {
+      height: 1.5px;
+      width: 80px;
+      background: linear-gradient(90deg, transparent, var(--pink-soft), transparent);
+      border-radius: 2px;
     }
 
     /* ==========================================================================
@@ -1304,8 +1305,8 @@
         height: 300px;
       }
 
-      .polaroid-img-wrapper {
-        height: 200px;
+      .video-film-frame {
+        max-width: 95vw;
       }
     }
   </style>
@@ -1354,28 +1355,6 @@
           ridiculously loved you are every single day.
         </p>
 
-        <!-- Live Love Duration Ticker -->
-        <div class="love-ticker-card" title="Count of days we've shared together">
-          <div class="ticker-item">
-            <span class="ticker-num" id="ticker-days">365</span>
-            <span class="ticker-label">Days</span>
-          </div>
-          <span class="ticker-divider">•</span>
-          <div class="ticker-item">
-            <span class="ticker-num" id="ticker-hours">12</span>
-            <span class="ticker-label">Hours</span>
-          </div>
-          <span class="ticker-divider">•</span>
-          <div class="ticker-item">
-            <span class="ticker-num" id="ticker-mins">48</span>
-            <span class="ticker-label">Mins</span>
-          </div>
-          <span class="ticker-divider">•</span>
-          <div class="ticker-item">
-            <span class="ticker-num" id="ticker-secs">00</span>
-            <span class="ticker-label">Secs of loving you</span>
-          </div>
-        </div>
 
         <div>
           <a href="#reasons" class="hero-cta" id="start-journey-btn">
@@ -1420,24 +1399,49 @@
   </section>
 
   <!-- ==========================================================================
-       SECTION 3: PHOTO GALLERY (Scattered Polaroids)
+       SECTION 3: VIDEO MEMORY
        ========================================================================== -->
   <section class="gallery-section" id="gallery">
     <div class="container">
       <div class="section-header">
         <div class="section-tag">
-          <span>📸</span> Scrapbook Memories
+          <span>🎬</span> Our Movie
         </div>
         <h2 class="section-title">
-          Our Favorite <span class="handwritten">Moments</span>
+          A Little Reel of <span class="handwritten">Us</span>
         </h2>
         <p class="section-sub">
-          Little snapshots frozen in time. Click any polaroid photo to look closer and read our memory backstory.
+          Every second with you is worth replaying. Press play and feel all the love 💕
         </p>
       </div>
 
-      <div class="polaroid-grid" id="polaroid-container">
-        <!-- Polaroid cards are rendered via JS for easy image & caption customization -->
+      <div class="video-memory-wrapper">
+        <div class="video-film-frame">
+          <div class="video-washi-tape"></div>
+
+          <div class="video-player-box" id="video-player-box">
+            <video id="love-video" src="photos/Love Instagram Reel in Romantic Style.mp4" playsinline loop
+              preload="metadata" aria-label="Our romantic love reel"></video>
+            <!-- Play overlay -->
+            <div class="video-play-overlay" id="video-play-overlay">
+              <div class="play-circle">▶️</div>
+            </div>
+          </div>
+
+          <div class="video-caption-area">
+            <p class="video-caption-title">Our Romantic Reel 🎞️</p>
+            <span class="video-caption-date">Forever & Always 💕</span>
+          </div>
+
+          <span class="video-corner-sticker">💖</span>
+        </div>
+
+        <!-- Decorative ribbon -->
+        <div class="video-ribbon-row">
+          <span class="hr-line"></span>
+          <span>made with all my love</span>
+          <span class="hr-line"></span>
+        </div>
       </div>
     </div>
   </section>
@@ -1689,13 +1693,16 @@
       // 4. Update title, date, sticker emoji, and story to match.
       // 5. Add or remove {} blocks to show as many photos as you like.
       // =========================================================
+      // focus: where to crop the image — "top center" keeps faces visible.
+      // Fine-tune per photo: "center", "top", "bottom", "30% 20%", etc.
       photos: [
         {
           id: 1,
           title: "Our First Memory Together",          // ← edit this
           date: "August 2023",                         // ← edit this
           sticker: "🌅",                               // ← any emoji
-          image: "photos/photo1.jpg",                  // ← your file in photos/
+          image: "photos/photo1.png",                  // ← your file in photos/
+          focus: "top center",                         // ← crop position (faces = top)
           story: "Write the sweet backstory for this memory here."  // ← edit
         },
         {
@@ -1703,7 +1710,8 @@
           title: "Our Favourite Adventure",
           date: "October 2023",
           sticker: "🌿",
-          image: "photos/photo2.jpg",
+          image: "photos/photo2.png",
+          focus: "top center",
           story: "Write the sweet backstory for this memory here."
         },
         {
@@ -1711,18 +1719,11 @@
           title: "A Cozy Day Together",
           date: "December 2023",
           sticker: "☕",
-          image: "photos/photo3.jpg",
-          story: "Write the sweet backstory for this memory here."
-        },
-        {
-          id: 4,
-          title: "Under The Stars",
-          date: "April 2024",
-          sticker: "⭐",
-          image: "photos/photo4.jpg",
+          image: "photos/photo3.png",
+          focus: "top center",
           story: "Write the sweet backstory for this memory here."
         }
-        // ← Add more photos by copying a { } block above and incrementing id!
+        // ← Add more photos: drop photo4.png in photos/ and copy a { } block above!
       ],
 
       // Hug & Compliment Messages
@@ -2010,50 +2011,28 @@
         }, 200);
       });
 
-      // 5. Render Polaroid Gallery
-      const polaroidContainer = document.getElementById('polaroid-container');
-      polaroidContainer.innerHTML = LOVE_LETTER_CONFIG.photos.map((p, idx) => `
-        <div class="polaroid-card" data-photo-id="${p.id}" tabindex="0" role="button" aria-label="Photo: ${p.title}">
-          <div class="washi-tape top-${idx % 2 === 0 ? 'left' : 'right'} ${idx % 3 === 0 ? 'yellow' : idx % 3 === 1 ? 'peach' : 'mint'}"></div>
-          <div class="polaroid-img-wrapper">
-            <img src="${p.image}" alt="${p.title}" loading="lazy" />
-          </div>
-          <h4 class="polaroid-caption">${p.title}</h4>
-          <span class="polaroid-date">${p.date}</span>
-          <span class="polaroid-corner-sticker">${p.sticker}</span>
-        </div>
-      `).join('');
+      // 5. Video Play / Pause Toggle
+      const loveVideo = document.getElementById('love-video');
+      const videoOverlay = document.getElementById('video-play-overlay');
 
-      // Polaroid Lightbox Modal
-      const modal = document.getElementById('gallery-modal');
-      const modalImg = document.getElementById('modal-img');
-      const modalCaption = document.getElementById('modal-caption');
-      const modalStory = document.getElementById('modal-story');
-      const modalClose = document.getElementById('modal-close-btn');
-
-      document.querySelectorAll('.polaroid-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const photoId = parseInt(card.getAttribute('data-photo-id'));
-          const item = LOVE_LETTER_CONFIG.photos.find(p => p.id === photoId);
-          if (item) {
-            modalImg.src = item.image;
-            modalCaption.textContent = item.title;
-            modalStory.textContent = item.story;
-            modal.classList.add('is-active');
-            soundSynth.playPop();
-          }
-        });
-      });
-
-      modalClose.addEventListener('click', () => {
-        modal.classList.remove('is-active');
+      videoOverlay.addEventListener('click', () => {
+        loveVideo.play();
+        videoOverlay.classList.add('is-hidden');
         soundSynth.playPop();
       });
 
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('is-active');
+      loveVideo.addEventListener('click', () => {
+        if (!loveVideo.paused) {
+          loveVideo.pause();
+          videoOverlay.classList.remove('is-hidden');
+        } else {
+          loveVideo.play();
+          videoOverlay.classList.add('is-hidden');
         }
+      });
+
+      loveVideo.addEventListener('ended', () => {
+        videoOverlay.classList.remove('is-hidden');
       });
 
       // 6. Interactive Hug Dispenser
